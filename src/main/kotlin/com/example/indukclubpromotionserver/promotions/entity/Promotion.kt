@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.UUID
 
 //*
@@ -31,16 +32,16 @@ class Promotion (
     var userName : String,
 
     @Column(nullable = false, updatable = false)
-    var createAt : LocalDate,
+    var createAt : LocalDateTime,
 
     @Column(nullable = false, updatable = false)
-    var closeAt : LocalDate,
+    var closeAt : LocalDateTime,
 
     @Column(nullable = false)
-    var begin : LocalDate,
+    var begin : LocalDateTime,
 
     @Column(nullable = false)
-    var end : LocalDate,
+    var end : LocalDateTime,
 
     @Column(nullable = false)
     var requiredPeople : Int,

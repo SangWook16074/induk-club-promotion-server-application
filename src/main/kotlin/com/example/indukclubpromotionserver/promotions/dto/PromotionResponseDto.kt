@@ -2,6 +2,7 @@ package com.example.indukclubpromotionserver.promotions.dto
 
 import com.example.indukclubpromotionserver.promotions.entity.Promotion
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.util.*
 
 data class PromotionResponseDto (
@@ -9,10 +10,10 @@ data class PromotionResponseDto (
     var content : String,
     var userName : String,
     var club : String,
-    var createAt : LocalDate,
-    var closeAt : LocalDate,
-    var begin : LocalDate,
-    var end : LocalDate,
+    var createAt : LocalDateTime,
+    var closeAt : LocalDateTime,
+    var begin : LocalDateTime,
+    var end : LocalDateTime,
     var requiredPeople : Int,
     var contentOfActivity : String,
 )
