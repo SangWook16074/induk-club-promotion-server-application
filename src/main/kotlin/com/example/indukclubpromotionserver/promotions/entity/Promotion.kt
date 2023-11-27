@@ -7,6 +7,8 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import java.time.LocalDate
+import java.util.UUID
+
 //*
 // Promotion Entity 정의
 // */
@@ -14,7 +16,7 @@ import java.time.LocalDate
 class Promotion (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    var id : Long?,
+    var id : UUID,
 
     @Column(nullable = false, length = 100,)
     var title : String,
@@ -44,7 +46,6 @@ class Promotion (
     var contentOfActivity : String,
 ) {
     fun toResponse() : PromotionResponseDto = PromotionResponseDto(
-        id = id,
         userName = userName,
         title = title,
         content = content,

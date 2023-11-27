@@ -2,9 +2,9 @@ package com.example.indukclubpromotionserver.promotions.dto
 
 import com.example.indukclubpromotionserver.promotions.entity.Promotion
 import java.time.LocalDate
+import java.util.*
 
-class PromotionResponseDto (
-    var id : Long?,
+data class PromotionResponseDto (
     var title : String,
     var content : String,
     var userName : String,

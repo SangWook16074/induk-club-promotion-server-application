@@ -9,7 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PathVariable
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import java.time.LocalDate
+import java.util.*
 
 //*
 // Promotino Repository의 실질적인 Business Logic
@@ -24,7 +28,7 @@ class PromotionSerivce {
         repository.saveAll(
             listOf(
                 Promotion(
-                    id = 1,
+                    id = UUID.randomUUID(),
                     userName = "한상욱",
                     title = "A&I 신규 인원 모집",
                     content = "2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.",
@@ -36,7 +40,7 @@ class PromotionSerivce {
                     requiredPeople = 10,
                 ),
                 Promotion(
-                    id = 2,
+                    id = UUID.randomUUID(),
                     userName = "한상욱",
                     title = "A&I 신규 인원 모집",
                     content = "2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.",
@@ -48,7 +52,7 @@ class PromotionSerivce {
                     requiredPeople = 10,
                 ),
                 Promotion(
-                    id = 3,
+                    id = UUID.randomUUID(),
                     userName = "한상욱",
                     title = "A&I 신규 인원 모집",
                     content = "2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.",
@@ -60,7 +64,7 @@ class PromotionSerivce {
                     requiredPeople = 10,
                 ),
                 Promotion(
-                    id = 4,
+                    id = UUID.randomUUID(),
                     userName = "한상욱",
                     title = "A&I 신규 인원 모집",
                     content = "2022학년도에 진행한 스터디그룹 활동으로 처음 모여 모바일 앱 개발 공부 및 협업 프로젝트를 진행했으며, 플레이스토어와 앱스토어에 정식 출시까비 했습니다. 그리고 현재는 새로운 프로젝트를 준비하고 있습니다.",
@@ -76,10 +80,15 @@ class PromotionSerivce {
         )
     }
 
-    @GetMapping
     fun getPromotions() : ResponseEntity<List<PromotionResponseDto>> {
         val promotions = repository.findAll()
         return ResponseEntity.ok(promotions.map { it.toResponse() })
+    }
+
+    fun postPromotion(promotionRequestDto: PromotionRequestDto) : ResponseEntity<PromotionResponseDto> {
+        val result = repository.save(promotionRequestDto.toEntity())
+        return ResponseEntity.ok(result.toResponse())
+
     }
 
 }
