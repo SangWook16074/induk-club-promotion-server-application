@@ -8,6 +8,7 @@ data class PromotionResponseDto (
     var title : String,
     var content : String,
     var userName : String,
+    var club : String,
     var createAt : LocalDate,
     var closeAt : LocalDate,
     var begin : LocalDate,

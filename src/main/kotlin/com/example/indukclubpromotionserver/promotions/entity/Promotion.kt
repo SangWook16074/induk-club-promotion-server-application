@@ -21,6 +21,9 @@ class Promotion (
     @Column(nullable = false, length = 100,)
     var title : String,
 
+    @Column(nullable = false, length = 100,)
+    var club : String,
+
     @Column(nullable = false, length = 1000,)
     var content : String,
 
@@ -47,6 +50,7 @@ class Promotion (
 ) {
     fun toResponse() : PromotionResponseDto = PromotionResponseDto(
         userName = userName,
+        club = club,
         title = title,
         content = content,
         createAt = createAt,
