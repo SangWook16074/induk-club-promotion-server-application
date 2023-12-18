@@ -6,6 +6,7 @@ import com.example.indukclubpromotionserver.promotions.entity.Promotion
 import com.example.indukclubpromotionserver.promotions.repository.PromotionRepository
 import jakarta.annotation.PostConstruct
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
 import org.springframework.web.bind.annotation.GetMapping
@@ -87,11 +88,12 @@ class PromotionSerivce {
 
     fun getPromotions() : ResponseEntity<List<PromotionResponseDto>> {
         val promotions = repository.findAll()
-        return ResponseEntity.ok(promotions.map { it.toResponse() })
+        return ResponseEntity(promotions.map { it.toResponse() }, HttpStatus.OK)
     }
 
-    fun postPromotion(promotionRequestDto: PromotionRequestDto): Promotion {
-        return repository.save(promotionRequestDto.toEntity())
+    fun postPromotion(promotionRequestDto: PromotionRequestDto) : ResponseEntity<PromotionResponseDto> {
+        val promotion = repository.save(promotionRequestDto.toEntity())
+        return ResponseEntity(promotion.toResponse(), HttpStatus.CREATED)
     }
 
 }

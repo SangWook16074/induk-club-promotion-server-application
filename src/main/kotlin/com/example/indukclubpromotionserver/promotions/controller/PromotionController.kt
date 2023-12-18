@@ -27,7 +27,7 @@ class PromotionController {
     }
 
     @PostMapping
-    private fun postPromotion(@RequestBody promotionRequestDto: PromotionRequestDto) : Promotion {
+    private fun postPromotion(@RequestBody promotionRequestDto: PromotionRequestDto) : ResponseEntity<PromotionResponseDto> {
         return service.postPromotion(promotionRequestDto)
     }
 }
