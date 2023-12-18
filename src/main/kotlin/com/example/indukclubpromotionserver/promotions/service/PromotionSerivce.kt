@@ -90,10 +90,8 @@ class PromotionSerivce {
         return ResponseEntity.ok(promotions.map { it.toResponse() })
     }
 
-    fun postPromotion(promotionRequestDto: PromotionRequestDto) : ResponseEntity<PromotionResponseDto> {
-        val result = repository.save(promotionRequestDto.toEntity())
-        return ResponseEntity.ok(result.toResponse())
-
+    fun postPromotion(promotionRequestDto: PromotionRequestDto): Promotion {
+        return repository.save(promotionRequestDto.toEntity())
     }
 
 }

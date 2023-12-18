@@ -2,6 +2,7 @@ package com.example.indukclubpromotionserver.promotions.controller
 
 import com.example.indukclubpromotionserver.promotions.dto.PromotionRequestDto
 import com.example.indukclubpromotionserver.promotions.dto.PromotionResponseDto
+import com.example.indukclubpromotionserver.promotions.entity.Promotion
 import com.example.indukclubpromotionserver.promotions.service.PromotionSerivce
 import jakarta.annotation.PostConstruct
 import org.springframework.beans.factory.annotation.Autowired
@@ -22,13 +23,11 @@ class PromotionController {
 
     @GetMapping
     private fun getPromotions() : ResponseEntity<List<PromotionResponseDto>> {
-        println(service.getPromotions())
         return service.getPromotions()
     }
 
     @PostMapping
-    private fun postPromotion(@RequestBody promotionRequestDto: PromotionRequestDto) : ResponseEntity<PromotionResponseDto> {
-        println(service.postPromotion(promotionRequestDto))
+    private fun postPromotion(@RequestBody promotionRequestDto: PromotionRequestDto) : Promotion {
         return service.postPromotion(promotionRequestDto)
     }
 }
