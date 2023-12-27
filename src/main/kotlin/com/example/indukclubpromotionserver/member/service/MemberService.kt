@@ -1,7 +1,6 @@
 package com.example.indukclubpromotionserver.member.service
 
 import com.example.indukclubpromotionserver.member.dto.MemberDto
-import com.example.indukclubpromotionserver.member.dto.toEntity
 import com.example.indukclubpromotionserver.member.entity.Member
 import com.example.indukclubpromotionserver.member.repository.MemberRepository
 import jakarta.transaction.Transactional
@@ -17,7 +16,7 @@ class MemberService (
     fun signUp(memberDto: MemberDto) : ResponseEntity<String> {
         var member : Member? = memberRepository.findByEmail(memberDto.email)
         if (member != null) {
-            return ResponseEntity("이미 등록된 회원입니다.", HttpStatus.OK)
+            return ResponseEntity("이미 등록된 회원입니다.", HttpStatus.BAD_REQUEST)
         } else {
             memberRepository.save(memberDto.toEntity())
             return ResponseEntity("회원가입이 완료되었습니다.", HttpStatus.CREATED)

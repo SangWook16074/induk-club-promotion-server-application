@@ -8,11 +8,13 @@ data class MemberDto(
     var email: String,
     var name:String,
     var password:String,
-)
-
-fun MemberDto.toEntity() = Member(
+) {
+    fun toEntity() : Member = Member(
         id = id,
         email = email,
         name = name,
         password = password,
     )
+}
+
+
