@@ -7,6 +7,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 data class PromotionRequestDto (
+    var id : Long?,
     var title : String,
     var content : String,
     var userName : String,
@@ -19,7 +20,7 @@ data class PromotionRequestDto (
     var contentOfActivity : String,
 ) {
     fun toEntity() : Promotion = Promotion(
-        id = UUID.randomUUID(),
+        id = id,
         title = title,
         content = content,
         userName = userName,

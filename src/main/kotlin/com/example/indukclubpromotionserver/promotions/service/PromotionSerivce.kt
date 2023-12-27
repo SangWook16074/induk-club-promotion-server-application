@@ -30,7 +30,7 @@ class PromotionSerivce {
         repository.saveAll(
             listOf(
                 Promotion(
-                    id = UUID.randomUUID(),
+                    id = 1,
                     userName = "한상욱",
                     club = "A&I",
                     title = "A&I 신규 인원 모집",
@@ -43,7 +43,7 @@ class PromotionSerivce {
                     requiredPeople = 10,
                 ),
                 Promotion(
-                    id = UUID.randomUUID(),
+                    id = 2,
                     userName = "한상욱",
                     club = "A&I",
                     title = "A&I 신규 인원 모집",
@@ -56,7 +56,7 @@ class PromotionSerivce {
                     requiredPeople = 10,
                 ),
                 Promotion(
-                    id = UUID.randomUUID(),
+                    id = 3,
                     userName = "한상욱",
                     club = "A&I",
                     title = "A&I 신규 인원 모집",
@@ -69,7 +69,7 @@ class PromotionSerivce {
                     requiredPeople = 10,
                 ),
                 Promotion(
-                    id = UUID.randomUUID(),
+                    id = 4,
                     userName = "한상욱",
                     club = "A&I",
                     title = "A&I 신규 인원 모집",

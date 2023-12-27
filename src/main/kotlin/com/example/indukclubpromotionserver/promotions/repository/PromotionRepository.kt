@@ -8,4 +8,4 @@ import java.util.*
 //*
 // 프로모션을 가지고오기 위한 Repository Interface
 // */
-interface PromotionRepository : JpaRepository<Promotion, UUID?>
+interface PromotionRepository : JpaRepository<Promotion, Long?>

@@ -17,7 +17,7 @@ import java.util.UUID
 class Promotion (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    var id : UUID,
+    var id : Long?,
 
     @Column(nullable = false, length = 100,)
     var title : String,
