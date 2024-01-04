@@ -11,8 +11,6 @@ import com.example.indukclubpromotionserver.member.entity.MemberRole
 import com.example.indukclubpromotionserver.member.repository.MemberRepository
 import com.example.indukclubpromotionserver.member.repository.MemberRoleRepository
 import jakarta.transaction.Transactional
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.stereotype.Service
@@ -38,9 +36,7 @@ class MemberService (
         memberRepository.save(memberDto.toEntity())
         memberRoleRepository.save(memberRole)
         return "회원가입이 완료되었습니다."
-
     }
-
     /**
      * 로그인 후 토큰 발행
      */

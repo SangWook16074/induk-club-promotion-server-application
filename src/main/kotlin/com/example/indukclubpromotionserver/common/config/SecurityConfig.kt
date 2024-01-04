@@ -1,5 +1,7 @@
-package com.example.indukclubpromotionserver.common.authority
+package com.example.indukclubpromotionserver.common.config
 
+import com.example.indukclubpromotionserver.common.authority.JwtAuthenticationFilter
+import com.example.indukclubpromotionserver.common.authority.JwtTokenProvider
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -44,5 +46,6 @@ class SecurityConfig (
     }
 
     @Bean
-    fun passwordEncoder() : PasswordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder()
+    fun passwordEncoder() : PasswordEncoder =
+        PasswordEncoderFactories.createDelegatingPasswordEncoder()
 }
