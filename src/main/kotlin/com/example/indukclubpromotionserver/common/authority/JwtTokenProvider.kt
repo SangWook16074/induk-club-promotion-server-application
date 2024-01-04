@@ -15,7 +15,7 @@ import java.lang.RuntimeException
 import java.util.Collections
 import java.util.Date
 
-const val EXPIRATION_MILLISECONDS : Long = 1000 * 60 * 30
+const val EXPIRATION_MILLISECONDS : Long = 1000 * 60 * 60 * 12
 @Component
 class JwtTokenProvider {
     @Value("\${jwt.secret}")
