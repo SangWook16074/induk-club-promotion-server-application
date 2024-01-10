@@ -11,9 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component
-import java.lang.RuntimeException
-import java.util.Collections
-import java.util.Date
+import java.util.*
 
 const val EXPIRATION_MILLISECONDS : Long = 1000 * 60 * 60 * 12
 @Component
@@ -74,7 +72,6 @@ class JwtTokenProvider {
                 else -> {} // else
             }
         }
-
         return false
     }
     private fun getClaims(token : String) : Claims {

@@ -27,15 +27,28 @@ class MemberService (
      * 회원가입
      */
     fun signUp(memberDto: MemberDto) : String {
-        var member : Member? = memberRepository.findByEmail(memberDto.email)
-        if (member != null) {
+        if (checkAlreadySignUp(memberDto.email)) {
             throw InvalidInputException("email", "이미 등록된 이메일입니다.")
         }
-        val memberRole : MemberRole = MemberRole(null, ROLE.MEMBER, memberDto.toEntity())
+        // 회원정보 저장
+//        memberRepository.save(memberDto.toEntity())
 
-        memberRepository.save(memberDto.toEntity())
+        // 회원권한 저장
+        val memberRole : MemberRole = MemberRole(null, ROLE.MEMBER, memberDto.toEntity())
         memberRoleRepository.save(memberRole)
         return "회원가입이 완료되었습니다."
+    }
+
+    /**
+     * 중복회원인지
+     * 확인하는 함수
+     */
+    fun checkAlreadySignUp(email : String) : Boolean {
+        val member : Member? = memberRepository.findByEmail(email)
+        // 회원이 존재하면 true
+        // 존재하지 않으면 false
+        print(member)
+        return member != null
     }
     /**
      * 로그인 후 토큰 발행

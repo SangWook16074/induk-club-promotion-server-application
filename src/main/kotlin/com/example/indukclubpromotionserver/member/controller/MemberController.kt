@@ -5,7 +5,6 @@ import com.example.indukclubpromotionserver.common.dto.BaseResponse
 import com.example.indukclubpromotionserver.member.dto.LoginDto
 import com.example.indukclubpromotionserver.member.dto.MemberDto
 import com.example.indukclubpromotionserver.member.service.MemberService
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -25,6 +24,16 @@ class MemberController (
         val resultMsg : String = memberService.signUp(memberDto)
         return BaseResponse(message = resultMsg)
     }
+
+    /**
+     * 이메일 중복 확인
+     */
+    @PostMapping("/duplicate")
+    fun checkAlreadySignUp(@RequestBody email : String) : BaseResponse<Boolean> {
+        val result = memberService.checkAlreadySignUp(email)
+        return BaseResponse(data = result)
+    }
+
     /**
      * 로그인
      */

@@ -8,7 +8,7 @@ import jakarta.persistence.*
 class Member (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    var id : Long? = null,
+    var id : Long?,
 
     @Column(nullable = false, length = 30)
     var email : String,
@@ -19,7 +19,7 @@ class Member (
     @Column(nullable = false, length = 100)
     var password : String,
 ) {
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = [CascadeType.ALL])
     val memberRole : List<MemberRole>? = null
 }
 
@@ -27,12 +27,12 @@ class Member (
 class MemberRole (
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    var id : Long? = null,
+    var id : Long?,
 
     @Column(nullable = false, length = 30)
     var role : ROLE,
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
     @JoinColumn(foreignKey = ForeignKey(name = "fk_member_role_member_id"))
     var member : Member
 

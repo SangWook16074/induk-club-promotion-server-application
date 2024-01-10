@@ -3,8 +3,10 @@ package com.example.indukclubpromotionserver.member.dto
 import com.fasterxml.jackson.annotation.JsonProperty
 
 data class LoginDto(
-    private val _email : String?,
-    private val _password : String?,
+    @JsonProperty("email")
+    private val _email: String?,
+    @JsonProperty("password")
+    private val _password: String?,
 ) {
     val email : String
         get() = _email!!
