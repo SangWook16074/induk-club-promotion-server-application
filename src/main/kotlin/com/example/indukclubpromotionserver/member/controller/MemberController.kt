@@ -4,11 +4,9 @@ import com.example.indukclubpromotionserver.common.authority.TokenInfo
 import com.example.indukclubpromotionserver.common.dto.BaseResponse
 import com.example.indukclubpromotionserver.member.dto.LoginDto
 import com.example.indukclubpromotionserver.member.dto.MemberDto
+import com.example.indukclubpromotionserver.member.dto.MemberResponseDto
 import com.example.indukclubpromotionserver.member.service.MemberService
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/member")
@@ -41,6 +39,15 @@ class MemberController (
     fun login(@RequestBody loginDto: LoginDto) : BaseResponse<TokenInfo> {
         val tokenInfo = memberService.login(loginDto)
         return BaseResponse(data = tokenInfo)
+    }
+
+    /**
+     * 내 정보 조회
+     */
+    @GetMapping("/info/{id}")
+    fun searchMyInfo(@PathVariable id : Long) : BaseResponse<MemberResponseDto> {
+        val response = memberService.searchMyInfo(id)
+        return BaseResponse(data = response)
     }
 
 }

@@ -29,9 +29,11 @@ class SecurityConfig (
                 /**
                  * requestMatchers에 기입한 Url을 요청하는 사용자는
                  * 권한이 없는 사용자고
-                 * 그 외의 요청은 모든 접근을 허용함
+                 * api/member/ 이하의 모든 api는 MEMBER 권한이 있어야 함.
                  */
-                it.requestMatchers("api/member/signup").anonymous().anyRequest().permitAll()
+                it.requestMatchers("/api/member/signup", "/api/member/login").anonymous()
+                    .requestMatchers("/api/member/info/**").hasRole("MEMBER")
+                    .anyRequest().permitAll()
             }
             .addFilterBefore(
                 /**

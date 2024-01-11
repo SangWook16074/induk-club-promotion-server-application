@@ -6,11 +6,13 @@ import com.example.indukclubpromotionserver.common.exception.InvalidInputExcepti
 import com.example.indukclubpromotionserver.common.status.ROLE
 import com.example.indukclubpromotionserver.member.dto.LoginDto
 import com.example.indukclubpromotionserver.member.dto.MemberDto
+import com.example.indukclubpromotionserver.member.dto.MemberResponseDto
 import com.example.indukclubpromotionserver.member.entity.Member
 import com.example.indukclubpromotionserver.member.entity.MemberRole
 import com.example.indukclubpromotionserver.member.repository.MemberRepository
 import com.example.indukclubpromotionserver.member.repository.MemberRoleRepository
 import jakarta.transaction.Transactional
+import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.stereotype.Service
@@ -30,11 +32,10 @@ class MemberService (
         if (checkAlreadySignUp(memberDto.email)) {
             throw InvalidInputException("email", "이미 등록된 이메일입니다.")
         }
-        // 회원정보 저장
-//        memberRepository.save(memberDto.toEntity())
 
-        // 회원권한 저장
-        val memberRole : MemberRole = MemberRole(null, ROLE.MEMBER, memberDto.toEntity())
+        // 회원정보 및 권한 저장
+        val memberRole : MemberRole = MemberRole(
+            null, ROLE.MEMBER, memberDto.toEntity())
         memberRoleRepository.save(memberRole)
         return "회원가입이 완료되었습니다."
     }
@@ -58,5 +59,14 @@ class MemberService (
         val authentication = authenticationManagerBuilder.`object`.authenticate(authenticationToken)
 
         return jwtTokenProvider.createToken(authentication)
+    }
+
+    /**
+     * 내 정보 조회
+     */
+    fun searchMyInfo(id : Long) : MemberResponseDto {
+        val member : Member = memberRepository.findByIdOrNull(id)
+            ?: throw InvalidInputException("id", "회원번호 (${id})가 존재하지 않는 유저입니다.")
+        return member.toResponse()
     }
 }

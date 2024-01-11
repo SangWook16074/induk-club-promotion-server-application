@@ -21,7 +21,9 @@ class JwtTokenProvider {
 
     private val key by lazy { Keys.hmacShaKeyFor(Decoders.BASE64.decode(secretKey)) }
 
-    // 토큰생성
+    /**
+     * 토큰 생성
+     */
     fun createToken(authentication: Authentication) : TokenInfo {
         val authorities : String = authentication
             .authorities
@@ -41,12 +43,14 @@ class JwtTokenProvider {
         return TokenInfo("Bearer", accessToken)
     }
 
-    // 토큰정버 추출
+    /**
+     * 토큰 정보 추출
+     */
     fun getAuthentication(token: String) : Authentication {
         val claims : Claims = getClaims(token)
 
         val auth = claims["auth"] ?: throw RuntimeException("잘못된 토큰입니다.")
-
+        println("auth : $auth")
         val authorities : Collection<GrantedAuthority> = (auth as String)
             .split(",")
             .map { SimpleGrantedAuthority(it) }
@@ -63,6 +67,7 @@ class JwtTokenProvider {
             getClaims(token)
             return true
         } catch (e : Exception) {
+            println(e.message)
             when (e) {
                 is SecurityException -> {} // Invalid JWT Token
                 is MalformedJwtException -> {} // Invalid JWT Token
@@ -76,6 +81,7 @@ class JwtTokenProvider {
     }
     private fun getClaims(token : String) : Claims {
         return Jwts.parser()
+            .verifyWith(key)
             .build()
             .parseSignedClaims(token)
             .payload

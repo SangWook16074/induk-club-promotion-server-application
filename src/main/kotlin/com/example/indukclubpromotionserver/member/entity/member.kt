@@ -1,6 +1,7 @@
 package com.example.indukclubpromotionserver.member.entity
 
 import com.example.indukclubpromotionserver.common.status.ROLE
+import com.example.indukclubpromotionserver.member.dto.MemberResponseDto
 import jakarta.persistence.*
 
 @Entity
@@ -21,6 +22,11 @@ class Member (
 ) {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "member", cascade = [CascadeType.ALL])
     val memberRole : List<MemberRole>? = null
+
+    fun toResponse() : MemberResponseDto = MemberResponseDto(
+        id = id!!,
+        name = name,
+    )
 }
 
 @Entity
@@ -30,6 +36,7 @@ class MemberRole (
     var id : Long?,
 
     @Column(nullable = false, length = 30)
+    @Enumerated(EnumType.STRING)
     var role : ROLE,
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
