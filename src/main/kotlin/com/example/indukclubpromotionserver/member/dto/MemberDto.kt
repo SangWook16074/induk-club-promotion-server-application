@@ -1,7 +1,6 @@
 package com.example.indukclubpromotionserver.member.dto
 
 import com.example.indukclubpromotionserver.member.entity.Member
-import jakarta.persistence.Id
 
 data class MemberDto(
     var id: Long?,
@@ -17,4 +16,17 @@ data class MemberDto(
     )
 }
 
+data class SocialMemberDto(
+    var id: Long?,
+    var email: String,
+    var name: String,
+    var socialId : String,
+) {
+    fun toEntity() : Member = Member(
+        id = id,
+        email = email,
+        name = name,
+        password = null,
+    )
+}
 

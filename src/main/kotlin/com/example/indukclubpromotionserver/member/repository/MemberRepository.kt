@@ -1,7 +1,6 @@
 package com.example.indukclubpromotionserver.member.repository
 
-import com.example.indukclubpromotionserver.member.entity.Member
-import com.example.indukclubpromotionserver.member.entity.MemberRole
+import com.example.indukclubpromotionserver.member.entity.*
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface MemberRepository : JpaRepository<Member, Long?> {
@@ -9,3 +8,9 @@ interface MemberRepository : JpaRepository<Member, Long?> {
 }
 
 interface MemberRoleRepository : JpaRepository<MemberRole, Long?>
+
+interface KaKaoRepository : JpaRepository<KaKao, String?>
+
+interface GoogleRepository : JpaRepository<Google, String?>
+
+interface AppleRepository : JpaRepository<Apple, String?>
