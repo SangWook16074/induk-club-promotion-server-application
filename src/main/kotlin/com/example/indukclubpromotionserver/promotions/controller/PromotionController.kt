@@ -1,18 +1,11 @@
 package com.example.indukclubpromotionserver.promotions.controller
 
+import com.example.indukclubpromotionserver.common.dto.BaseResponse
 import com.example.indukclubpromotionserver.promotions.dto.PromotionRequestDto
 import com.example.indukclubpromotionserver.promotions.dto.PromotionResponseDto
-import com.example.indukclubpromotionserver.promotions.entity.Promotion
 import com.example.indukclubpromotionserver.promotions.service.PromotionSerivce
-import jakarta.annotation.PostConstruct
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/promotions")
@@ -22,12 +15,14 @@ class PromotionController {
     private lateinit var service : PromotionSerivce
 
     @GetMapping
-    private fun getPromotions() : ResponseEntity<List<PromotionResponseDto>> {
-        return service.getPromotions()
+    private fun getPromotions() : BaseResponse<List<PromotionResponseDto>> {
+        val result = service.getPromotions()
+        return BaseResponse(data = result)
     }
 
     @PostMapping
-    private fun postPromotion(@RequestBody promotionRequestDto: PromotionRequestDto) : ResponseEntity<PromotionResponseDto> {
-        return service.postPromotion(promotionRequestDto)
+    private fun postPromotion(@RequestBody promotionRequestDto: PromotionRequestDto) : BaseResponse<PromotionResponseDto> {
+        val result = service.postPromotion(promotionRequestDto)
+        return BaseResponse(data = result)
     }
 }

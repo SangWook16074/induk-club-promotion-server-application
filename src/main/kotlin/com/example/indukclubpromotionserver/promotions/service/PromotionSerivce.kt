@@ -6,16 +6,8 @@ import com.example.indukclubpromotionserver.promotions.entity.Promotion
 import com.example.indukclubpromotionserver.promotions.repository.PromotionRepository
 import jakarta.annotation.PostConstruct
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.stereotype.Service
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import java.time.LocalDate
 import java.time.LocalDateTime
-import java.util.*
 
 //*
 // Promotino Repository의 실질적인 Business Logic
@@ -86,14 +78,14 @@ class PromotionSerivce {
         )
     }
 
-    fun getPromotions() : ResponseEntity<List<PromotionResponseDto>> {
+    fun getPromotions() : List<PromotionResponseDto> {
         val promotions = repository.findAll()
-        return ResponseEntity(promotions.map { it.toResponse() }, HttpStatus.OK)
+        return promotions.map { it.toResponse() }
     }
 
-    fun postPromotion(promotionRequestDto: PromotionRequestDto) : ResponseEntity<PromotionResponseDto> {
+    fun postPromotion(promotionRequestDto: PromotionRequestDto) : PromotionResponseDto {
         val promotion = repository.save(promotionRequestDto.toEntity())
-        return ResponseEntity(promotion.toResponse(), HttpStatus.CREATED)
+        return promotion.toResponse()
     }
 
 }

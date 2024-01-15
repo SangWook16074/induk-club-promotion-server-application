@@ -15,18 +15,3 @@ data class MemberDto(
         password = password,
     )
 }
-
-data class SocialMemberDto(
-    var id: Long?,
-    var email: String,
-    var name: String,
-    var socialId : String,
-) {
-    fun toEntity() : Member = Member(
-        id = id,
-        email = email,
-        name = name,
-        password = null,
-    )
-}
-
