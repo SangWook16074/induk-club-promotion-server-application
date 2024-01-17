@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.stereotype.Component
 import java.util.*
 
-const val EXPIRATION_MILLISECONDS : Long = 1
+const val EXPIRATION_MILLISECONDS : Long = 1000 * 60 * 60 * 12
 @Component
 class JwtTokenProvider {
     @Value("\${jwt.secret}")
