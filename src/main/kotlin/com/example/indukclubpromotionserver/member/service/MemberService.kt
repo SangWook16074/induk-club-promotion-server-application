@@ -4,11 +4,14 @@ import com.example.indukclubpromotionserver.common.authority.JwtTokenProvider
 import com.example.indukclubpromotionserver.common.authority.TokenInfo
 import com.example.indukclubpromotionserver.common.exception.InvalidInputException
 import com.example.indukclubpromotionserver.common.status.ROLE
+import com.example.indukclubpromotionserver.member.dto.ClubInfoDto
 import com.example.indukclubpromotionserver.member.dto.LoginDto
 import com.example.indukclubpromotionserver.member.dto.MemberDto
 import com.example.indukclubpromotionserver.member.dto.MemberResponseDto
+import com.example.indukclubpromotionserver.member.entity.ClubInfo
 import com.example.indukclubpromotionserver.member.entity.Member
 import com.example.indukclubpromotionserver.member.entity.MemberRole
+import com.example.indukclubpromotionserver.member.repository.ClubInfoRepository
 import com.example.indukclubpromotionserver.member.repository.MemberRepository
 import com.example.indukclubpromotionserver.member.repository.MemberRoleRepository
 import jakarta.transaction.Transactional
@@ -16,12 +19,16 @@ import org.springframework.data.repository.findByIdOrNull
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.stereotype.Service
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 @Transactional
 @Service
 class MemberService (
     private val memberRepository : MemberRepository,
     private val memberRoleRepository: MemberRoleRepository,
+    private val clubInfoRepository : ClubInfoRepository,
     private val authenticationManagerBuilder : AuthenticationManagerBuilder,
     private val jwtTokenProvider: JwtTokenProvider,
 ) {
@@ -63,9 +70,30 @@ class MemberService (
     /**
      * 내 정보 조회
      */
-    fun searchMyInfo(userId : Long) : MemberResponseDto {
-        val member : Member = memberRepository.findByIdOrNull(userId)
+    fun searchMyInfo(userId: Long): MemberResponseDto {
+        val member: Member = memberRepository.findByIdOrNull(userId)
             ?: throw InvalidInputException("userId", "회원번호 (${userId})가 존재하지 않는 유저입니다.")
-        return member.toResponse()
+        val clubInfo: ClubInfo? = clubInfoRepository.findByMember(member)
+        return MemberResponseDto(
+            id = member.id!!,
+            name = member.name,
+            clubInfo = clubInfo?.toResponse(),
+        )
+    }
+
+    /**
+     * 내 동아리 정보 갱신
+     */
+    fun saveMyClubInfo(clubInfoDto: ClubInfoDto, userId : Long) : String {
+        val member : Optional<Member> = memberRepository.findById(userId)
+        val clubInfo = ClubInfo(
+            id = null,
+            clubName = clubInfoDto.clubName,
+            createAt = LocalDateTime.parse(clubInfoDto.createAt, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")),
+            classify = clubInfoDto.classify,
+            member = member.get()
+        )
+        clubInfoRepository.save(clubInfo)
+        return "내 동아리 정보가 수정되었습니다."
     }
 }

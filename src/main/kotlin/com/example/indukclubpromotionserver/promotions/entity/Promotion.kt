@@ -1,14 +1,8 @@
 package com.example.indukclubpromotionserver.promotions.entity
 
 import com.example.indukclubpromotionserver.promotions.dto.PromotionResponseDto
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Id
-import java.time.LocalDate
+import jakarta.persistence.*
 import java.time.LocalDateTime
-import java.util.UUID
 
 //*
 // Promotion Entity 정의
@@ -29,7 +23,7 @@ class Promotion (
     var content : String,
 
     @Column(nullable = false, length = 10)
-    var userName : String,
+    var userId : Long,
 
     @Column(nullable = false, updatable = false)
     var createAt : LocalDateTime,
@@ -50,7 +44,7 @@ class Promotion (
     var contentOfActivity : String,
 ) {
     fun toResponse() : PromotionResponseDto = PromotionResponseDto(
-        userName = userName,
+        userId = userId,
         club = club,
         title = title,
         content = content,
