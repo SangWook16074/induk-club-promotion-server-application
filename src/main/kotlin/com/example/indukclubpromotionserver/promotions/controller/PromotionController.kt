@@ -22,7 +22,7 @@ class PromotionController {
         return BaseResponse(data = result)
     }
 
-    @PostMapping
+    @PostMapping("/post")
     private fun postPromotion(@RequestBody promotionRequestDto: PromotionRequestDto) : BaseResponse<PromotionResponseDto> {
         val userId = (SecurityContextHolder.getContext().authentication.principal as CustomUser).id
         val result = service.postPromotion(promotionRequestDto, userId)

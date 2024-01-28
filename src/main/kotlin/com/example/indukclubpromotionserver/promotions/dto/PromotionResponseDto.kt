@@ -13,4 +13,6 @@ data class PromotionResponseDto (
     var end : LocalDateTime,
     var requiredPeople : Int,
     var contentOfActivity : String,
+    var url : String?,
+    var images : List<String>?,
 )

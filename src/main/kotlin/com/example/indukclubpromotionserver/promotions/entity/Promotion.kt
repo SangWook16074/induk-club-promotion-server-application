@@ -8,51 +8,60 @@ import java.time.LocalDateTime
 // Promotion Entity 정의
 // */
 @Entity
-class Promotion (
+class Promotion(
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    var id : Long?,
+    var id: Long?,
 
     @Column(nullable = false, length = 100,)
-    var title : String,
+    var title: String,
 
     @Column(nullable = false, length = 100,)
-    var club : String,
+    var club: String,
 
     @Column(nullable = false, length = 1000,)
-    var content : String,
+    var content: String,
 
     @Column(nullable = false, length = 10)
-    var userId : Long,
+    var userId: Long,
 
     @Column(nullable = false, updatable = false)
-    var createAt : LocalDateTime,
+    var createAt: LocalDateTime,
 
     @Column(nullable = false, updatable = false)
-    var closeAt : LocalDateTime,
+    var closeAt: LocalDateTime,
 
     @Column(nullable = false)
-    var begin : LocalDateTime,
+    var begin: LocalDateTime,
 
     @Column(nullable = false)
-    var end : LocalDateTime,
+    var end: LocalDateTime,
 
     @Column(nullable = false)
-    var requiredPeople : Int,
+    var requiredPeople: Int,
 
     @Column(nullable = false, length = 1000)
-    var contentOfActivity : String,
-) {
+    var contentOfActivity: String,
+
+    @Column(length = 1000)
+    var url : String?,
+
+    @ElementCollection
+    var images: List<String>?,
+
+    ) {
     fun toResponse() : PromotionResponseDto = PromotionResponseDto(
         userId = userId,
-        club = club,
         title = title,
         content = content,
+        club = club,
         createAt = createAt,
         closeAt = closeAt,
         begin = begin,
         end = end,
         contentOfActivity = contentOfActivity,
         requiredPeople = requiredPeople,
+        url = url,
+        images = images,
     )
 }

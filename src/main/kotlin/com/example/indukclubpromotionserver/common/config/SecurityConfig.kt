@@ -32,7 +32,7 @@ class SecurityConfig (
                  * api/member/ 이하의 모든 api는 MEMBER 권한이 있어야 함.
                  */
                 it.requestMatchers("/api/member/signup", "/api/member/login").anonymous()
-                    .requestMatchers("/api/member/info/**").hasRole("MEMBER")
+                    .requestMatchers("/api/member/info/**", "api/promotions/post").hasRole("MEMBER")
                     .anyRequest().permitAll()
             }
             .addFilterBefore(

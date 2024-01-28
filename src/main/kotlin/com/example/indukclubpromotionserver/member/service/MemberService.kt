@@ -86,14 +86,29 @@ class MemberService (
      */
     fun saveMyClubInfo(clubInfoDto: ClubInfoDto, userId : Long) : String {
         val member : Optional<Member> = memberRepository.findById(userId)
-        val clubInfo = ClubInfo(
-            id = null,
-            clubName = clubInfoDto.clubName,
-            createAt = LocalDateTime.parse(clubInfoDto.createAt, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")),
-            classify = clubInfoDto.classify,
-            member = member.get()
-        )
-        clubInfoRepository.save(clubInfo)
-        return "내 동아리 정보가 수정되었습니다."
+        val myClubInfo : ClubInfo? = clubInfoRepository.findByMember(member.get());
+        if (myClubInfo == null) {
+            val clubInfo = ClubInfo(
+                id = null,
+                clubName = clubInfoDto.clubName,
+                createAt = LocalDateTime.parse(clubInfoDto.createAt, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")),
+                classify = clubInfoDto.classify,
+                member = member.get()
+            )
+            clubInfoRepository.save(clubInfo)
+            return "내 동아리 정보가 수정되었습니다."
+        } else {
+            val clubInfo = ClubInfo(
+                id = myClubInfo.id,
+                clubName = clubInfoDto.clubName,
+                createAt = LocalDateTime.parse(clubInfoDto.createAt, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS")),
+                classify = clubInfoDto.classify,
+                member = member.get()
+            )
+            clubInfoRepository.save(clubInfo)
+            return "내 동아리 정보가 수정되었습니다."
+        }
+
+
     }
 }
