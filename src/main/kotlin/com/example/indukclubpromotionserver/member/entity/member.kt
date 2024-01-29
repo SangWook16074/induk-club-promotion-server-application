@@ -34,6 +34,9 @@ class Member (
         clubInfo = club?.toResponse(),
 
     )
+    fun resetPassword(password : String) {
+        this.password = password
+    }
 }
 
 @Entity

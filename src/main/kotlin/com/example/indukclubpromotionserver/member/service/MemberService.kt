@@ -4,10 +4,7 @@ import com.example.indukclubpromotionserver.common.authority.JwtTokenProvider
 import com.example.indukclubpromotionserver.common.authority.TokenInfo
 import com.example.indukclubpromotionserver.common.exception.InvalidInputException
 import com.example.indukclubpromotionserver.common.status.ROLE
-import com.example.indukclubpromotionserver.member.dto.ClubInfoDto
-import com.example.indukclubpromotionserver.member.dto.LoginDto
-import com.example.indukclubpromotionserver.member.dto.MemberDto
-import com.example.indukclubpromotionserver.member.dto.MemberResponseDto
+import com.example.indukclubpromotionserver.member.dto.*
 import com.example.indukclubpromotionserver.member.entity.ClubInfo
 import com.example.indukclubpromotionserver.member.entity.Member
 import com.example.indukclubpromotionserver.member.entity.MemberRole
@@ -16,6 +13,8 @@ import com.example.indukclubpromotionserver.member.repository.MemberRepository
 import com.example.indukclubpromotionserver.member.repository.MemberRoleRepository
 import jakarta.transaction.Transactional
 import org.springframework.data.repository.findByIdOrNull
+import org.springframework.mail.SimpleMailMessage
+import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder
 import org.springframework.stereotype.Service
@@ -31,6 +30,7 @@ class MemberService (
     private val clubInfoRepository : ClubInfoRepository,
     private val authenticationManagerBuilder : AuthenticationManagerBuilder,
     private val jwtTokenProvider: JwtTokenProvider,
+    private val javaMailSender: JavaMailSender,
 ) {
     /**
      * 회원가입
@@ -110,5 +110,37 @@ class MemberService (
         }
 
 
+    }
+
+    /**
+     * 비밀번호 초기화
+     * 그리고 초기화된 비밀번호를
+     * 사용자에게 전송해줌.
+     */
+    fun resetPassword(resetPasswordRequestDto: ResetPasswordRequestDto) : String {
+        val member : Member? = memberRepository.findByEmail(resetPasswordRequestDto.email)
+        return if (member == null) {
+            "존재하지 않는 사용자입니다."
+        } else {
+            var password : String = getRandomString(12)
+            var sender : SimpleMailMessage = SimpleMailMessage()
+            sender.setSubject("IDCP 임시 비밀번호 발송")
+            sender.setText("임시 비밀번호 : $password")
+            sender.setTo(resetPasswordRequestDto.email)
+            javaMailSender.send(sender)
+            member.resetPassword(password)
+            memberRepository.save(member)
+            "메일을 전송하였습니다 !"
+        }
+    }
+
+    /**
+     * 랜덤 비밀번호 생성 메소드
+     */
+    fun getRandomString(length: Int) : String {
+        val charset = ('a'..'z') + ('A'..'Z') + ('0'..'9')
+
+        return List(length) { charset.random() }
+            .joinToString("")
     }
 }

@@ -3,10 +3,7 @@ package com.example.indukclubpromotionserver.member.controller
 import com.example.indukclubpromotionserver.common.authority.TokenInfo
 import com.example.indukclubpromotionserver.common.dto.BaseResponse
 import com.example.indukclubpromotionserver.common.dto.CustomUser
-import com.example.indukclubpromotionserver.member.dto.ClubInfoDto
-import com.example.indukclubpromotionserver.member.dto.LoginDto
-import com.example.indukclubpromotionserver.member.dto.MemberDto
-import com.example.indukclubpromotionserver.member.dto.MemberResponseDto
+import com.example.indukclubpromotionserver.member.dto.*
 import com.example.indukclubpromotionserver.member.service.MemberService
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.bind.annotation.*
@@ -62,6 +59,15 @@ class MemberController (
         val userId = (SecurityContextHolder.getContext().authentication.principal as CustomUser).id
         val response = memberService.saveMyClubInfo(clubInfoDto, userId)
         return BaseResponse(data = response)
+    }
+
+    /**
+     * 비밀번호 재설정
+     */
+    @PostMapping("/reset-password")
+    fun resetPassword(@RequestBody resetPasswordRequestDto: ResetPasswordRequestDto) : BaseResponse<String> {
+        val resultMsg = memberService.resetPassword(resetPasswordRequestDto)
+        return BaseResponse(message = resultMsg)
     }
 
 

@@ -7,6 +7,18 @@ server:
       force: true
 
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    default-encoding: utf-8
+    username: "noreplyidcp03300@gmail.com"
+    password: "nqwjgogtugperctw"
+    properties :
+      mail :
+        smtp :
+          auth : true
+          starttls :
+            enable : true
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: "jdbc:mysql://localhost:3306/mysql_ex"
