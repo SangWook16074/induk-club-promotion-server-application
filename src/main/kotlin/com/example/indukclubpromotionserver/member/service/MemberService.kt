@@ -113,6 +113,26 @@ class MemberService (
     }
 
     /**
+     * 이메일 인증 로직
+     * 회원가입된 이메일을 통해
+     * 인증 코드를 발송해줌
+     */
+    fun authWithEmail(resetPasswordRequestDto: ResetPasswordRequestDto) : String {
+        val member : Member? = memberRepository.findByEmail(resetPasswordRequestDto.email)
+        return if (member == null) {
+            "존재하지 않는 사용자입니다."
+        } else {
+            val authCode : String = getRandomString(6)
+            var sender : SimpleMailMessage = SimpleMailMessage()
+            sender.setSubject("IDCP 이메일 인증")
+            sender.setText("인증 코드 : $authCode")
+            sender.setTo(resetPasswordRequestDto.email)
+            javaMailSender.send(sender)
+            return authCode
+        }
+    }
+
+    /**
      * 비밀번호 초기화
      * 그리고 초기화된 비밀번호를
      * 사용자에게 전송해줌.

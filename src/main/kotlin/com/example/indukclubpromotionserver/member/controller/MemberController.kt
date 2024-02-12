@@ -62,6 +62,15 @@ class MemberController (
     }
 
     /**
+     * 이메일 인증 로직
+     */
+    @PostMapping("/email-auth")
+    fun authWithEmail(@RequestBody resetPasswordRequestDto: ResetPasswordRequestDto) : BaseResponse<String> {
+        val resultMsg = memberService.authWithEmail(resetPasswordRequestDto)
+        return BaseResponse(data = resultMsg)
+    }
+
+    /**
      * 비밀번호 재설정
      */
     @PostMapping("/reset-password")
