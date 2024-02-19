@@ -1,5 +1,4 @@
 server:
-  address: 3.39.102.199
   port: 8080
   servlet:
     encoding:
