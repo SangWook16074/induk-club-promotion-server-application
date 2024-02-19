@@ -12,8 +12,8 @@ spring:
     host: smtp.gmail.com
     port: 587
     default-encoding: utf-8
-    username: ${GOOGLE_ID}
-    password: ${GOOGLE_PASSWORD}
+    username: "noreplyidcp03300@gmail.com"
+    password: "nqwjgogtugperctw"
     properties :
       mail :
         smtp :
@@ -23,8 +23,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: "jdbc:mysql://localhost:3306/mysql_ex"
-    username: ${MYSQL_ID}
-    password: ${MYSQL_PASSWORD}
+    username: hsw
+    password: QWERqwer7*
   jpa:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
@@ -39,7 +39,7 @@ spring:
     open-in-view: true
 
 jwt:
-  secret: ${JWT_SECRET}
+  secret: DadFufN4Oui8Bfv3ScFj6R9fyJ9hD45E6AGFsXgFsRhT4YSdSb
 logging:
   level:
     org:
