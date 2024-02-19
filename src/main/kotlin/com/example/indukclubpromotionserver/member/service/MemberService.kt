@@ -155,6 +155,21 @@ class MemberService (
     }
 
     /**
+     * 이메일 인증 메소드
+     * 요청을 받으면 사용자의 인증 코드를 반환하고
+     * 사용자의 이메일로 인증 코드를 보내줌
+     */
+    fun verifyEmail(email: EmailRequestDto) : String {
+        var code : String = getRandomString(6)
+        var sender : SimpleMailMessage = SimpleMailMessage()
+        sender.setSubject("IDCP 이메일 인증 번호 발송")
+        sender.setText("인증 확인 코드 : $code")
+        sender.setTo(email.email)
+        javaMailSender.send(sender)
+        return code
+    }
+
+    /**
      * 랜덤 비밀번호 생성 메소드
      */
     fun getRandomString(length: Int) : String {

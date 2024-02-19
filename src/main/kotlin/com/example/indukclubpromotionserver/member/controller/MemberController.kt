@@ -27,8 +27,8 @@ class MemberController (
      * 이메일 중복 확인
      */
     @PostMapping("/duplicate")
-    fun checkEmail(@RequestBody email : String) : BaseResponse<Boolean> {
-        val result = memberService.checkEmail(email)
+    fun checkEmail(@RequestBody email : EmailRequestDto) : BaseResponse<Boolean> {
+        val result = memberService.checkEmail(email.email)
         return BaseResponse(data = result)
     }
 
@@ -79,6 +79,13 @@ class MemberController (
         return BaseResponse(message = resultMsg)
     }
 
-
+    /**
+     * 회원가입 이메일 인증 로직
+     */
+    @PostMapping("/verify-email")
+    fun verifyEmail(@RequestBody email : EmailRequestDto) : BaseResponse<String> {
+        val response = memberService.verifyEmail(email)
+        return BaseResponse(data = response)
+    }
 
 }

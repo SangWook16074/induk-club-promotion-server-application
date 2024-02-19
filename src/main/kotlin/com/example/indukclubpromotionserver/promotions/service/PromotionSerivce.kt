@@ -34,7 +34,7 @@ class PromotionSerivce {
                     end = LocalDateTime.now(),
                     contentOfActivity = "UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.",
                     requiredPeople = 10,
-                    url = null,
+                    url = "https://docs.google.com/forms/d/e/1FAIpQLSeE64sjD3ymrPw3wEdjKT11oEUqOz2UW9TuoevhAiRB73CAbg/viewform?usp=sf_link",
                     images = listOf<String>(
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3l9C58Dj31BhnXcMBMqLcL7T0foOUcsuEEg&usqp=CAU"
                     )
@@ -51,7 +51,7 @@ class PromotionSerivce {
                     end = LocalDateTime.now(),
                     contentOfActivity = "UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.",
                     requiredPeople = 10,
-                    url = null,
+                    url = "https://docs.google.com/forms/d/e/1FAIpQLSeE64sjD3ymrPw3wEdjKT11oEUqOz2UW9TuoevhAiRB73CAbg/viewform?usp=sf_link",
                     images = listOf<String>(
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3l9C58Dj31BhnXcMBMqLcL7T0foOUcsuEEg&usqp=CAU"
                     )
@@ -68,7 +68,7 @@ class PromotionSerivce {
                     end = LocalDateTime.now(),
                     contentOfActivity = "UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.",
                     requiredPeople = 10,
-                    url = null,
+                    url = "https://docs.google.com/forms/d/e/1FAIpQLSeE64sjD3ymrPw3wEdjKT11oEUqOz2UW9TuoevhAiRB73CAbg/viewform?usp=sf_link",
                     images = listOf<String>(
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3l9C58Dj31BhnXcMBMqLcL7T0foOUcsuEEg&usqp=CAU"
                     )
@@ -85,7 +85,7 @@ class PromotionSerivce {
                     end = LocalDateTime.now(),
                     contentOfActivity = "UI/UX 디자인  프로젝트 화면 (UI)을 디자인하고, 이를 위한 미디어 파일 제작합니다.",
                     requiredPeople = 10,
-                    url = null,
+                    url = "https://docs.google.com/forms/d/e/1FAIpQLSeE64sjD3ymrPw3wEdjKT11oEUqOz2UW9TuoevhAiRB73CAbg/viewform?usp=sf_link",
                     images = listOf<String>(
                         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3l9C58Dj31BhnXcMBMqLcL7T0foOUcsuEEg&usqp=CAU"
                     )
