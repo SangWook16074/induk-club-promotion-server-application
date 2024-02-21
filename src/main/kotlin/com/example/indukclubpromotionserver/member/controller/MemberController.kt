@@ -71,11 +71,20 @@ class MemberController (
     }
 
     /**
-     * 비밀번호 재설정
+     * 비밀번호 초기화
      */
     @PostMapping("/reset-password")
     fun resetPassword(@RequestBody resetPasswordRequestDto: ResetPasswordRequestDto) : BaseResponse<String> {
         val resultMsg = memberService.resetPassword(resetPasswordRequestDto)
+        return BaseResponse(message = resultMsg)
+    }
+
+    /**
+     * 비밀번호 변경
+     */
+    @PostMapping("/change-password")
+    fun changePassword(@RequestBody resetPasswordRequestDto: ResetPasswordRequestDto) : BaseResponse<String> {
+        val resultMsg = memberService.changePassword(resetPasswordRequestDto)
         return BaseResponse(message = resultMsg)
     }
 

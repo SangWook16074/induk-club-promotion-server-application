@@ -154,6 +154,21 @@ class MemberService (
         }
     }
 
+
+    /**
+     * 비밀번호 변경 메소드
+     */
+    fun changePassword(resetPasswordRequestDto: ResetPasswordRequestDto) : String {
+        val member : Member? = memberRepository.findByEmail(resetPasswordRequestDto.email)
+        return if (member == null) {
+            "존재하지 않는 사용자입니다."
+        } else {
+            member.resetPassword(resetPasswordRequestDto.password)
+            memberRepository.save(member)
+            "비밀번호가 변경되었습니다 !"
+        }
+    }
+
     /**
      * 이메일 인증 메소드
      * 요청을 받으면 사용자의 인증 코드를 반환하고
