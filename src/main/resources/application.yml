@@ -2,7 +2,7 @@ server:
   ssl:
     key-store: keystore.p12
     key-store-type: PKCS12
-    key-store-password: QWERqwer7*
+    key-store-password: qwer1234
   port: 8080
   servlet:
     encoding:
