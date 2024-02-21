@@ -20,6 +20,7 @@ class SecurityConfig (
     @Bean
     fun filterChain(http : HttpSecurity) : SecurityFilterChain {
         http
+            .cors { it.disable() }
             .httpBasic { it.disable() } // 끄기
             .csrf { it.disable() } //끄기
             .sessionManagement {
